@@ -1,0 +1,18 @@
+[project]
+name = "silly_compiler"
+version = "0.1.0"
+description = "Compiler XD"
+authors = [
+  { name="Tapaneeya Odmung", email="tapaneeya@windowslive.com" }
+]
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+packages = ["tokenizer", "parser", "ast"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
