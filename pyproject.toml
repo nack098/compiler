@@ -1,5 +1,5 @@
 [project]
-name = "silly_compiler"
+name = "compiler"
 version = "0.1.0"
 description = "Compiler XD"
 authors = [
