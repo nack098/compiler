@@ -1,9 +1,10 @@
+from collections.abc import Iterable
 from .estate import EState
 
 
 class Tokenizer:
 
-    raw: str | None = None
+    raw: Iterable = []
     index: int = 0
     length: int = 0
     state: EState = EState.SKIP
@@ -50,8 +51,9 @@ class Tokenizer:
         else:
             raise StopIteration
     
-    def set(self, text:str):
+    def __call__(self, text:Iterable):
         self.state = EState.SKIP
         self.length = len(text)
         self.index = 0
         self.raw = text
+        return self
