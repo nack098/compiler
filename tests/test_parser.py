@@ -1,3 +1,4 @@
+from file_reader import FileReader
 from tokenizer import Tokenizer
 from parser import Parser
 
@@ -49,13 +50,13 @@ parsing_table = {
 }
 
 
+file_reader = FileReader()
 tokenizer = Tokenizer(skip_symbols=skip_symbols)
 parser = Parser(rules=rules, parsing_table=parsing_table)
 
 
 def test_parser_basic():
-    text = "MOV R1,200"
-    tokenizer(text)
+    tokenizer(file_reader("tests/test1.s"))
     parser(token=tokenizer)
     res = list(parser)
     expect = [
@@ -63,15 +64,7 @@ def test_parser_basic():
     assert res == expect
 
 def test_parser_multiline():
-    text = """
-        CLRA
-        MOV R1,100
-        MOV R2,200
-        ADD R1
-        ADD R2
-        MOVA R1
-    """
-    tokenizer(text)
+    tokenizer(file_reader("tests/test2.s"))
     parser(token=tokenizer)
     res = list(parser)
     expect = [

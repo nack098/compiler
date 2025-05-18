@@ -1,3 +1,4 @@
+from file_reader import FileReader
 from pipeline import PipeLine
 from tokenizer import Tokenizer
 from parser import Parser
@@ -49,7 +50,7 @@ parsing_table = {
     ("num", "200"): 14,
 }
 
-
+file_reader = FileReader()
 tokenizer = Tokenizer(skip_symbols=skip_symbols)
 parser = Parser(rules=rules, parsing_table=parsing_table)
 
@@ -82,17 +83,8 @@ def test_manipulation():
     assert [20] == pipe(10).unwrap()
 
 def test_integrate():
-    text = """
-        CLRA
-        MOV R1,100
-        MOV R2,200
-        ADD R1
-        ADD R2
-        MOVA R1
-    """
-
-    pipe = PipeLine(tokenizer, parser)
-    res = pipe(text).unwrap()
+    pipe = PipeLine(file_reader, tokenizer, parser)
+    res = pipe("tests/test2.s").unwrap()
     expect = [
         "asm","op", "CLRA", "oprnd", "e",
         "asm", "op", "MOV", "oprnd", "reg", "R1", "param", ",", "num", "100",

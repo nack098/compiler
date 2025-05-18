@@ -1,3 +1,4 @@
+from file_reader import FileReader
 from pipeline import PipeLine
 from tokenizer import Tokenizer
 from parser import Parser
@@ -54,16 +55,15 @@ parsing_table = {
 }
 
 
+file_reader = FileReader()
 tokenizer = Tokenizer(skip_symbols=skip_symbols)
 parser = Parser(rules=rules, parsing_table=parsing_table)
 ast = AST()
 code_gen = CodeGen()
 
 def test_ast1():
-    text = "MOV R1,200"
-
-    pipe = PipeLine(tokenizer, parser, ast, code_gen)
-    val = pipe(text).unwrap()
+    pipe = PipeLine(file_reader, tokenizer, parser, ast, code_gen)
+    val = pipe("tests/test1.s").unwrap()
     res = b""
     for v in val:
         res += v
@@ -71,17 +71,8 @@ def test_ast1():
     assert res == b"\xb9\xc8\x00\x00\x00"
 
 def test_ast2():
-    text = """
-        CLRA
-        MOV R1,100
-        MOV R2,200
-        ADD R1
-        ADD R2
-        MOVA R1
-    """
-
-    pipe = PipeLine(tokenizer, parser, ast, code_gen)
-    val = pipe(text).unwrap()
+    pipe = PipeLine(file_reader, tokenizer, parser, ast, code_gen)
+    val = pipe("tests/test2.s").unwrap()
     res = b""
     for v in val:
         res += v
