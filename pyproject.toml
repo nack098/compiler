@@ -10,8 +10,9 @@ requires-python = ">=3.10"
 [project.optional-dependencies]
 dev = ["pytest"]
 
-[tool.setuptools]
-packages = ["tokenizer", "parser", "my_ast", "pipeline", "code_gen", "file_reader", "executable_gen"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["compiler*"]
 
 [build-system]
 requires = ["setuptools>=61.0"]

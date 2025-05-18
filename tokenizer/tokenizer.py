@@ -31,7 +31,9 @@ class Tokenizer:
                             return buf
                         if curr in self.skip_symbols:
                             self.state = EState.SKIP 
-                            return buf
+                            if len(buf) > 0:
+                                return buf
+                            continue
                         buf += curr
                         curr = next(self.raw)
                     case EState.COLLON:

@@ -25,6 +25,7 @@ rules = {
     12: ["R2"],
     13: ["100"],
     14: ["200"],
+    15: ["e"]
 }
 parsing_table = {
     ("asm", "CLRA"): 1,
@@ -42,6 +43,7 @@ parsing_table = {
     ("oprnd", "MOV"): 8,
     ("oprnd", "ADD"): 8,
     ("oprnd", "MOVA"): 8,
+    ("oprnd", ""): 15,
     ("reg", "R1"): 11,
     ("reg", "R2"): 12,
     ("param", ","): 9,

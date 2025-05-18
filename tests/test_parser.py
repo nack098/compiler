@@ -20,6 +20,7 @@ rules = {
     12: ["R2"],
     13: ["100"],
     14: ["200"],
+    15: ["e"]
 }
 parsing_table = {
     ("asm", "CLRA"): 1,
@@ -37,6 +38,7 @@ parsing_table = {
     ("oprnd", "MOV"): 8,
     ("oprnd", "ADD"): 8,
     ("oprnd", "MOVA"): 8,
+    ("oprnd", ""): 15,
     ("reg", "R1"): 11,
     ("reg", "R2"): 12,
     ("param", ","): 9,
@@ -75,3 +77,19 @@ def test_parser_multiline():
         "asm", "op", "ADD", "oprnd", "reg", "R2", "param", "e",
         "asm", "op", "MOVA", "oprnd", "reg", "R1", "param", "e", "asm", "e"]
     assert res == expect
+
+def test_parser3():
+    tokenizer(file_reader("tests/test3.s"))
+    parser(token=tokenizer)
+    res = list(parser)
+    print(res)
+    # expect = [
+    #     "asm","op", "CLRA", "oprnd", "e",
+    #     "asm", "op", "MOV", "oprnd", "reg", "R1", "param", ",", "num", "100",
+    #     "asm", "op", "MOV", "oprnd", "reg", "R2", "param", ",", "num", "200",
+    #     "asm", "op", "ADD", "oprnd", "reg", "R1", "param", "e",
+    #     "asm", "op", "ADD", "oprnd", "reg", "R2", "param", "e",
+    #     "asm", "op", "MOVA", "oprnd", "reg", "R1", "param", "e", "asm", "e"]
+    # assert res == expect
+
+test_parser3()

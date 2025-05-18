@@ -8,7 +8,7 @@ from executable_gen import ExecutableGenerator
 
 from sys import argv
 
-from config import Config
+from .config import Config
 
 def _main(path:str):
     proc = PipeLine(
