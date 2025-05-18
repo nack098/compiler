@@ -68,7 +68,7 @@ def test_ast1():
     for v in val:
         res += v
     print(res.hex())
-    assert res.hex() == b"\xb9\xc8\x00\x00\x00"
+    assert res == b"\xb9\xc8\x00\x00\x00"
 
 def test_ast2():
     text = """
@@ -85,6 +85,4 @@ def test_ast2():
     res = b""
     for v in val:
         res += v
-    assert res.hex() == b"\x31\xc0\xb9\x64\x00\x00\x00\xba\xc8\x00\x00\x00\x01\xc1\x01\xc2\x89\xc1"
-
-test_ast1()
+    assert res == b"\x31\xc0\xb9\x64\x00\x00\x00\xba\xc8\x00\x00\x00\x01\xc1\x01\xc2\x89\xc1"
