@@ -55,8 +55,8 @@ parser = Parser(rules=rules, parsing_table=parsing_table)
 
 def test_parser_basic():
     text = "MOV R1,200"
-    tokenizer.set(text)
-    parser.set(token=tokenizer)
+    tokenizer(text)
+    parser(token=tokenizer)
     res = list(parser)
     expect = [
         "asm", "op", "MOV", "oprnd", "reg", "R1", "param", ",", "num", "200", "asm", "e"]
@@ -71,8 +71,8 @@ def test_parser_multiline():
         ADD R2
         MOVA R1
     """
-    tokenizer.set(text)
-    parser.set(token=tokenizer)
+    tokenizer(text)
+    parser(token=tokenizer)
     res = list(parser)
     expect = [
         "asm","op", "CLRA", "oprnd", "e",

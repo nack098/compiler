@@ -57,6 +57,7 @@ class Parser:
         except IndexError:
             raise StopIteration
     
-    def set(self, token: Iterable):
+    def __call__(self, token: Iterable):
         self.token = token
         self.stack.extend(self.rules[self.starting_symbol])
+        return self
