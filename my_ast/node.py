@@ -8,6 +8,12 @@ class Node:
     
     def set_right(self, value):
         self.right = value
+    
+    def head(self):
+        return self.left
+    
+    def tail(self):
+        return self.right
 
     def __str__(self):
         return type(self).__name__

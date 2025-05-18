@@ -72,10 +72,10 @@ def test_ast1():
             res.append(tmp)
             tmp = []
         tmp.append(f"{curr}({curr.left}, {curr.right})")
-        if (type(curr.right) is EndNode) and curr.left:
-            curr = curr.left
+        if (type(curr.tail()) is EndNode) and curr.head():
+            curr = curr.head()
         else:
-            curr = curr.right
+            curr = curr.tail()
     res = [" -> ".join(v) for v in res]
     expect = ['StartNode(None, OpNode) -> OpNode(MOV, OprndNode) -> OprndNode(R1, OprndNode) -> OprndNode(200, StartNode)']
     assert res == expect
@@ -102,10 +102,10 @@ def test_ast2():
             res.append(tmp)
             tmp = []
         tmp.append(f"{curr}({curr.left}, {curr.right})")
-        if (type(curr.right) is EndNode) and curr.left:
-            curr = curr.left
+        if (type(curr.tail()) is EndNode) and curr.head():
+            curr = curr.head()
         else:
-            curr = curr.right
+            curr = curr.tail()
 
     res = [" -> ".join(v) for v in res]
     expect = ['StartNode(None, OpNode) -> OpNode(CLRA, OprndNode) -> OprndNode(StartNode, EndNode)',

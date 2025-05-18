@@ -25,7 +25,7 @@ class AST:
                 case "asm":
                     node = StartNode()
                     if self.current_node:
-                        if type(self.current_node.right) is EndNode:
+                        if type(self.current_node.tail()) is EndNode:
                             self.current_node.set_left(node)
                         else:
                             self.current_node.set_right(node)
